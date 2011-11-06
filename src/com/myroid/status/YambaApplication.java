@@ -10,18 +10,17 @@ import android.app.Application;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class YambaApplication extends Application 
 	implements OnSharedPreferenceChangeListener {
 	
-	private static final String OAUTH_KEY = "t3u5Ewni1jYDLkKhgLBQ";
-	private static final String OAUTH_SECRET = "tWT9YBw82vUifeDWSfAw3BXhEBIG3GLyqZPpDaahKHk";
+	public static final String OAUTH_KEY = "t3u5Ewni1jYDLkKhgLBQ";
+	public static final String OAUTH_SECRET = "tWT9YBw82vUifeDWSfAw3BXhEBIG3GLyqZPpDaahKHk";
 	
-	private static final String ACCESS_TOKEN = "111621749-3qIpEECdEkZW4089GxVxqsc16q5BNnIqsCCa46FV";
-	private static final String ACCESS_TOKEN_SECRET = "yJjjWCAFEH0GcbmdbSYxhiwMNzOm3JJ5EjHq9pseUo";
+//	private static final String ACCESS_TOKEN = "111621749-3qIpEECdEkZW4089GxVxqsc16q5BNnIqsCCa46FV";
+//	private static final String ACCESS_TOKEN_SECRET = "yJjjWCAFEH0GcbmdbSYxhiwMNzOm3JJ5EjHq9pseUo";
 	
 	private OAuthSignpostClient oauthClient;
 	
@@ -40,11 +39,11 @@ public class YambaApplication extends Application
 	public void onCreate() {
 		super.onCreate();
 		
-		oauthClient = 
-        		new OAuthSignpostClient(OAUTH_KEY, 
-        				OAUTH_SECRET, 
-        				ACCESS_TOKEN, 
-        				ACCESS_TOKEN_SECRET);
+//		oauthClient = 
+//        		new OAuthSignpostClient(OAUTH_KEY, 
+//        				OAUTH_SECRET, 
+//        				ACCESS_TOKEN, 
+//        				ACCESS_TOKEN_SECRET);
 		
 		prefs = 
 			PreferenceManager.getDefaultSharedPreferences(this);
@@ -67,6 +66,15 @@ public class YambaApplication extends Application
 	
 	public synchronized Twitter getTwitter() {
 		if (twitter == null) {
+			String token = prefs.getString("token", null);
+			String tokenSecret = prefs.getString("tokenSecret", null);
+			if (token != null && tokenSecret != null) {
+				oauthClient = 
+		        		new OAuthSignpostClient(OAUTH_KEY, 
+		        				OAUTH_SECRET, 
+		        				token, 
+		        				tokenSecret);
+			}
 			String username = prefs.getString("username", null);			
 			twitter = new Twitter(username, oauthClient);
 		}

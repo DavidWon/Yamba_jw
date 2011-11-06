@@ -4,12 +4,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class TimelineActivity2 extends BaseActivity {
 
@@ -41,6 +45,16 @@ public class TimelineActivity2 extends BaseActivity {
 		
 		filter = new IntentFilter(UpdaterService.NEW_STATUS_INTENT);
 		receiver = new TimelineReceiver();
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);		
+		String token = prefs.getString("token", null);		
+		String tokenSecret = prefs.getString("tokenSecret", null);		
+		if (token == null || tokenSecret == null) {		
+			startActivity(new Intent(TimelineActivity2.this, OAuthActivity.class));
+			Toast.makeText(TimelineActivity2.this, 
+						R.string.makeSetup, 
+						Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override

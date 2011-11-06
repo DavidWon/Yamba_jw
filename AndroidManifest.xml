@@ -29,11 +29,21 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".OAuthActivity" android:launchMode="singleTask"> 
+            <!-- Used for OAuth callback -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="callback" android:scheme="x-myroid-oauth"/>
+            </intent-filter> 
+        </activity>
+            
         <activity android:name=".StatusActivity"/>
          
         <activity android:name=".PrefsActivity"/>
         
-        <service android:name=".UpdaterService"/>
+      "C:/Users/jwyou/My Education/android/project/yamba/AndroidManifest.xml"  <service android:name=".UpdaterService"/>
         
         <receiver android:name=".NetworkReceiver">
             <intent-filter>
@@ -56,7 +66,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/yamba_widget_info"/>
         </receiver>
-        
+            
     </application>
     
 </manifest>
