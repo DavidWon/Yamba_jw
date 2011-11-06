@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item 
+    	android:title="@string/titlePrefs" 
+    	android:id="@+id/itemPrefs" 
+    	android:icon="@android:drawable/ic_menu_preferences"/>
+    <item 
+    	android:title="@string/titleStartService" 
+    	android:id="@+id/itemStartService" 
+    	android:icon="@android:drawable/ic_media_play"/>
+    <item 
+    	android:title="@string/titleStopService" 
+    	android:id="@+id/itemStopService" 
+    	android:icon="@android:drawable/ic_media_pause"/>
+    <item 
+    	android:title="@string/titleUpdateStatus" 
+    	android:id="@+id/itemStatus" 
+    	android:icon="@android:drawable/ic_menu_manage"/>
+    <item 
+    	android:title="@string/titleTimeline" 
+    	android:id="@+id/itemTimeline" 
+    	android:icon="@android:drawable/ic_menu_day"/>
+</menu>
